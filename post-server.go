@@ -32,15 +32,7 @@ func main() {
 }
 
 func fetchPost(w http.ResponseWriter, r *http.Request, producer *kafka.Producer) {
-	path := strings.Split(r.URL.Path, "/")
-	postId, err := strconv.Atoi(path[len(path)-1])
-
-	if err != nil {
-		w.WriteHeader(500)
-		fmt.Fprintf(w, "Error %v", err)
-		return
-	}
-
+	postId := mux.Vars(r)["id"]
 	subject, err := validateRequestAndGetSubject(r)
 
 	if err != nil || subject == "" {
@@ -58,6 +50,7 @@ func fetchPost(w http.ResponseWriter, r *http.Request, producer *kafka.Producer)
 	//Go to the post DB, fetch the post by id and return here
 	fmt.Fprintf(w, "POST %v", postId)
 }
+
 
 func pushToAnalyticsQueue(postView map[string]interface{}, producer *kafka.Producer) {
 	topic := "post_views"
