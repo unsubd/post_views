@@ -39,6 +39,6 @@ Solution for a Post View counter.
   
 3. [analytics-server.go](analytics-server.go) : Http server to run analytics queries
 
-    a. http GET to `/analytics/posts/{id}/users` will return all the users who have seen the given post
+    a. `HTTP GET` to `/analytics/posts/{id}/users` will return all the users who have seen the given post
     
-    b. http GET to `/analytics/users/{id}/posts` will return all the posts (POST IDs) that the user has seen
+    b. `HTTP GET` to `/analytics/users/{id}/posts` will return all the posts (POST IDs) that the user has seen
